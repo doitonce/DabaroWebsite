@@ -1,0 +1,73 @@
+[16:55:58.652] Running build in Washington, D.C., USA (East) – iad1
+[16:55:58.653] Build machine configuration: 2 cores, 8 GB
+[16:55:58.711] Cloning github.com/doitonce/DabaroWebsite (Branch: main, Commit: 7d796a4)
+[16:55:58.717] Skipping build cache, deployment was triggered without cache.
+[16:56:01.440] Cloning completed: 2.729s
+[16:56:01.749] Running "vercel build"
+[16:56:02.175] Vercel CLI 43.1.0
+[16:56:02.343] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[16:56:02.356] > Installing Builders: @vercel/node@3.0.7, @vercel/static-build@2.6.0
+[16:56:14.753] Installing dependencies...
+[16:56:15.545] npm warn EBADENGINE Unsupported engine {
+[16:56:15.546] npm warn EBADENGINE   package: 'undici@7.10.0',
+[16:56:15.546] npm warn EBADENGINE   required: { node: '>=20.18.1' },
+[16:56:15.547] npm warn EBADENGINE   current: { node: 'v18.20.6', npm: '10.8.2' }
+[16:56:15.547] npm warn EBADENGINE }
+[16:56:20.046] npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+[16:56:20.435] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[16:56:20.468] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[16:56:26.886] 
+[16:56:26.887] added 622 packages in 12s
+[16:56:26.888] 
+[16:56:26.888] 88 packages are looking for funding
+[16:56:26.888]   run `npm fund` for details
+[16:56:27.122] Using TypeScript 5.6.3 (local user-provided)
+[16:56:34.953] Using TypeScript 5.6.3 (local user-provided)
+[16:56:37.105] Using TypeScript 5.6.3 (local user-provided)
+[16:56:38.688] Using TypeScript 5.6.3 (local user-provided)
+[16:56:39.912] Using TypeScript 5.6.3 (local user-provided)
+[16:56:41.033] Using TypeScript 5.6.3 (local user-provided)
+[16:56:42.121] Using TypeScript 5.6.3 (local user-provided)
+[16:56:43.300] Running "npm run build"
+[16:56:43.443] 
+[16:56:43.444] > rest-express@1.0.0 build
+[16:56:43.445] > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+[16:56:43.445] 
+[16:56:43.703] [36mvite v5.4.14 [32mbuilding for production...[36m[39m
+[16:56:43.766] transforming...
+[16:56:44.078] Browserslist: browsers data (caniuse-lite) is 8 months old. Please run:
+[16:56:44.078]   npx update-browserslist-db@latest
+[16:56:44.078]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[16:56:52.556] [32m✓[39m 2882 modules transformed.
+[16:56:53.308] rendering chunks...
+[16:56:53.329] computing gzip size...
+[16:56:53.360] [2m../dist/public/[22m[32mindex.html                                               [39m[1m[2m    1.10 kB[22m[1m[22m[2m │ gzip:   0.70 kB[22m
+[16:56:53.361] [2m../dist/public/[22m[2massets/[22m[32mpartner-daeyoung-cUVG0CS6.png                     [39m[1m[2m   11.21 kB[22m[1m[22m
+[16:56:53.361] [2m../dist/public/[22m[2massets/[22m[32mpartner-vitzroem-new-DDkXjOM6.png                 [39m[1m[2m   22.39 kB[22m[1m[22m
+[16:56:53.361] [2m../dist/public/[22m[2massets/[22m[32mpartner-sungrim-Bhk200gs.png                      [39m[1m[2m   22.72 kB[22m[1m[22m
+[16:56:53.361] [2m../dist/public/[22m[2massets/[22m[32m55555555_1750080213653-BmImo_zR.png               [39m[1m[2m   27.48 kB[22m[1m[22m
+[16:56:53.361] [2m../dist/public/[22m[2massets/[22m[32mpartner-joungil-TfkeGRUN.png                      [39m[1m[2m   40.20 kB[22m[1m[22m
+[16:56:53.361] [2m../dist/public/[22m[2massets/[22m[32mpartner-sinyoung-rBLnWJ_m.png                     [39m[1m[2m   41.12 kB[22m[1m[22m
+[16:56:53.362] [2m../dist/public/[22m[2massets/[22m[32mpartner-osemco-DPZOy40J.png                       [39m[1m[2m   52.18 kB[22m[1m[22m
+[16:56:53.362] [2m../dist/public/[22m[2massets/[22m[32m22222_1750079070762-DRBUnfa0.jpg                  [39m[1m[2m   66.37 kB[22m[1m[22m
+[16:56:53.362] [2m../dist/public/[22m[2massets/[22m[32mqmfpdlwld rhdwjdeh 11_1750064122005-BUhM-QJe.png  [39m[1m[2m   91.92 kB[22m[1m[22m
+[16:56:53.362] [2m../dist/public/[22m[2massets/[22m[32m33333_1750079070761-C5_UqHIh.jpeg                 [39m[1m[2m  110.12 kB[22m[1m[22m
+[16:56:53.363] [2m../dist/public/[22m[2massets/[22m[32m4444444_1750079070761-CeTbJtYl.jpg                [39m[1m[2m  464.24 kB[22m[1m[22m
+[16:56:53.363] [2m../dist/public/[22m[2massets/[22m[32m111111_1750079070762-0B6vvEDX.png                 [39m[1m[2m  642.91 kB[22m[1m[22m
+[16:56:53.363] [2m../dist/public/[22m[2massets/[22m[32mimage_1750054908185-DnsoXDq0.png                  [39m[1m[2m3,084.04 kB[22m[1m[22m
+[16:56:53.364] [2m../dist/public/[22m[2massets/[22m[35mindex-00lNHNZ4.css                                [39m[1m[2m   93.00 kB[22m[1m[22m[2m │ gzip:  15.00 kB[22m
+[16:56:53.364] [2m../dist/public/[22m[2massets/[22m[36mindex-CwjHcVDW.js                                 [39m[1m[33m  998.63 kB[39m[22m[2m │ gzip: 294.73 kB[22m
+[16:56:53.364] [33m
+[16:56:53.364] (!) Some chunks are larger than 500 kB after minification. Consider:
+[16:56:53.365] - Using dynamic import() to code-split the application
+[16:56:53.365] - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+[16:56:53.365] - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[16:56:53.365] [32m✓ built in 9.64s[39m
+[16:56:53.410] 
+[16:56:53.410]   dist/index.js  46.1kb
+[16:56:53.411] 
+[16:56:53.411] ⚡ Done in 7ms
+[16:56:53.671] Build Completed in /vercel/output [39s]
+[16:56:53.937] Deploying outputs...
+[16:56:59.021] 
+[16:56:59.222] Deployment completed

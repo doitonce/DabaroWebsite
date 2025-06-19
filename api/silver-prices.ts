@@ -18,7 +18,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     const prices = await storage.getAllSilverPrices();
-    res.status(200).json(prices);
+    if (!prices || prices.length === 0) {
+      res.status(200).json([]);
+      return;
+    }
+    // Sort by date descending to ensure latest first
+    const sortedPrices = prices.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    res.status(200).json(sortedPrices);
   } catch (error) {
     console.error('Error fetching silver prices:', error);
     res.status(500).json({ error: 'Failed to fetch silver prices' });

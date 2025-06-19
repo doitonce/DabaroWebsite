@@ -214,6 +214,50 @@ export class MemStorage implements IStorage {
     this.currentSilverPriceId = 1;
     this.currentNewsId = 1;
     this.currentInventoryId = 1;
+    
+    // Initialize with sample data for Vercel deployment
+    this.initializeSampleData();
+  }
+
+  private initializeSampleData(): void {
+    // Add sample silver price data
+    const today = new Date().toISOString().split('T')[0].replace(/-/g, '/');
+    const samplePrice: SilverPrice = {
+      id: this.currentSilverPriceId++,
+      date: today,
+      priceKrw: 156868,
+      priceUsd: 1788,
+      priceOunce: 49186,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    this.silverPrices.set(today, samplePrice);
+
+    // Add sample inventory data
+    const sampleInventory: Inventory = {
+      id: this.currentInventoryId++,
+      itemName: "S-30",
+      silverContent: 30,
+      specification: "은함량 30% 브레이징 합금",
+      isRolled: false,
+      quantityGrams: "150.5",
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.inventoryItems.set(sampleInventory.id, sampleInventory);
+
+    // Add sample news data
+    const sampleNews: News = {
+      id: this.currentNewsId++,
+      title: "은 가격 동향 분석",
+      description: "최근 은 시장의 가격 변동 분석 및 전망",
+      url: "#",
+      source: "다바로",
+      publishedAt: new Date().toISOString(),
+      category: "precious-metals",
+      createdAt: new Date().toISOString()
+    };
+    this.newsItems.set(sampleNews.id, sampleNews);
   }
 
   async getUser(id: number): Promise<User | undefined> {
