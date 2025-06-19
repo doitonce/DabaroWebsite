@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(222, 84%, 4.9%);
+  --muted: hsl(210, 40%, 98%);
+  --muted-foreground: hsl(215, 16%, 46.9%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(222, 84%, 4.9%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(222, 84%, 4.9%);
+  --border: hsl(214, 32%, 91%);
+  --input: hsl(214, 32%, 91%);
+  --primary: hsl(142, 69%, 35%);
+  --primary-foreground: hsl(210, 40%, 98%);
+  --secondary: hsl(210, 10%, 96%);
+  --secondary-foreground: hsl(210, 10%, 20%);
+  --accent: hsl(142, 69%, 45%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(142, 69%, 35%);
+  --radius: 0.5rem;
+  
+  /* Custom colors for Dabaro theme - Green & Gray */
+  --dabaro-primary: hsl(142, 69%, 35%);
+  --dabaro-accent: hsl(142, 69%, 45%);
+  --dabaro-secondary: hsl(210, 10%, 50%);
+  --dabaro-dark: hsl(210, 10%, 20%);
+}
+
+.dark {
+  --background: hsl(222, 84%, 4.9%);
+  --foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17.5%);
+  --muted-foreground: hsl(215, 16%, 46.9%);
+  --popover: hsl(222, 84%, 4.9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 84%, 4.9%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17.5%);
+  --input: hsl(217, 32%, 17.5%);
+  --primary: hsl(210, 40%, 98%);
+  --primary-foreground: hsl(222, 84%, 4.9%);
+  --secondary: hsl(217, 32%, 17.5%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --accent: hsl(199, 89%, 48%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(212, 12%, 87%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  }
+  
+  .font-korean {
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-bg {
+    background: linear-gradient(135deg, var(--dabaro-primary) 0%, var(--dabaro-accent) 100%);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, var(--dabaro-primary) 0%, var(--dabaro-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+  
+  .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--dabaro-accent);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  .hero-content {
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+  }
+  
+  .dabaro-primary {
+    color: var(--dabaro-primary);
+  }
+  
+  .dabaro-accent {
+    color: var(--dabaro-accent);
+  }
+  
+  .bg-dabaro-primary {
+    background-color: var(--dabaro-primary);
+  }
+  
+  .bg-dabaro-accent {
+    background-color: var(--dabaro-accent);
+  }
+  
+  .bg-dabaro-dark {
+    background-color: var(--dabaro-dark);
+  }
+}
