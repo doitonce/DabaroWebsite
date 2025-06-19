@@ -143,9 +143,13 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createInventoryItem(insertInventory: InsertInventory): Promise<Inventory> {
+    const inventoryData = {
+      ...insertInventory,
+      quantityGrams: insertInventory.quantityGrams.toString()
+    };
     const [item] = await db
       .insert(inventory)
-      .values(insertInventory)
+      .values(inventoryData)
       .returning();
     return item;
   }
@@ -163,9 +167,18 @@ export class DatabaseStorage implements IStorage {
   }
 
   async updateInventoryItem(id: number, updateData: Partial<InsertInventory>): Promise<Inventory> {
+    const updatePayload: any = {
+      ...updateData,
+      updatedAt: new Date()
+    };
+    
+    if (updateData.quantityGrams !== undefined) {
+      updatePayload.quantityGrams = updateData.quantityGrams.toString();
+    }
+    
     const [item] = await db
       .update(inventory)
-      .set({ ...updateData, updatedAt: new Date() })
+      .set(updatePayload)
       .where(eq(inventory.id, id))
       .returning();
     return item;
@@ -336,9 +349,10 @@ export class MemStorage implements IStorage {
     const item: Inventory = {
       id,
       itemName: insertInventory.itemName,
+      silverContent: insertInventory.silverContent,
       specification: insertInventory.specification,
-      quantityGrams: insertInventory.quantityGrams,
-      unitPrice: insertInventory.unitPrice,
+      isRolled: insertInventory.isRolled,
+      quantityGrams: insertInventory.quantityGrams.toString(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -364,7 +378,11 @@ export class MemStorage implements IStorage {
     
     const updated: Inventory = {
       ...existing,
-      ...updateData,
+      itemName: updateData.itemName ?? existing.itemName,
+      silverContent: updateData.silverContent ?? existing.silverContent,
+      specification: updateData.specification ?? existing.specification,
+      isRolled: updateData.isRolled ?? existing.isRolled,
+      quantityGrams: updateData.quantityGrams !== undefined ? updateData.quantityGrams.toString() : existing.quantityGrams,
       updatedAt: new Date(),
     };
     this.inventoryItems.set(id, updated);
