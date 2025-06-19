@@ -27,8 +27,14 @@ export interface IStorage {
 
 export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
+    try {
+      console.log('[DatabaseStorage] Fetching user with id:', id);
+      const [user] = await db.select().from(users).where(eq(users.id, id));
+      return user || undefined;
+    } catch (error) {
+      console.error('[DatabaseStorage] Error fetching user:', error);
+      throw error;
+    }
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
@@ -84,16 +90,31 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getAllSilverPrices(): Promise<SilverPrice[]> {
-    return await db.select().from(silverPrices).orderBy(desc(silverPrices.date));
+    try {
+      console.log('[DatabaseStorage] Fetching all silver prices...');
+      const prices = await db.select().from(silverPrices).orderBy(desc(silverPrices.date));
+      console.log('[DatabaseStorage] Retrieved', prices.length, 'silver prices');
+      return prices;
+    } catch (error) {
+      console.error('[DatabaseStorage] Error fetching all silver prices:', error);
+      throw error;
+    }
   }
 
   async getLatestSilverPrice(): Promise<SilverPrice | undefined> {
-    const [latestPrice] = await db
-      .select()
-      .from(silverPrices)
-      .orderBy(desc(silverPrices.date))
-      .limit(1);
-    return latestPrice || undefined;
+    try {
+      console.log('[DatabaseStorage] Fetching latest silver price...');
+      const [latestPrice] = await db
+        .select()
+        .from(silverPrices)
+        .orderBy(desc(silverPrices.date))
+        .limit(1);
+      console.log('[DatabaseStorage] Latest price result:', latestPrice ? `Found: ${latestPrice.date}` : 'Not found');
+      return latestPrice || undefined;
+    } catch (error) {
+      console.error('[DatabaseStorage] Error fetching latest silver price:', error);
+      throw error;
+    }
   }
 
   async createNews(insertNews: InsertNews): Promise<News> {
@@ -247,15 +268,16 @@ export class MemStorage implements IStorage {
     this.inventoryItems.set(sampleInventory.id, sampleInventory);
 
     // Add sample news data
+    const now = new Date();
     const sampleNews: News = {
       id: this.currentNewsId++,
       title: "은 가격 동향 분석",
       description: "최근 은 시장의 가격 변동 분석 및 전망",
       url: "#",
       source: "다바로",
-      publishedAt: new Date().toISOString(),
+      publishedAt: now,
       category: "precious-metals",
-      createdAt: new Date().toISOString()
+      createdAt: now
     };
     this.newsItems.set(sampleNews.id, sampleNews);
   }
@@ -438,6 +460,16 @@ export class MemStorage implements IStorage {
   }
 }
 
+// Debug logging for storage initialization
+console.log('[Storage Init] DATABASE_URL exists:', !!process.env.DATABASE_URL);
+console.log('[Storage Init] NODE_ENV:', process.env.NODE_ENV);
+
 export const storage = process.env.DATABASE_URL 
-  ? new DatabaseStorage() 
-  : new MemStorage();
+  ? (() => {
+      console.log('[Storage Init] Using DatabaseStorage');
+      return new DatabaseStorage();
+    })()
+  : (() => {
+      console.log('[Storage Init] Using MemStorage');
+      return new MemStorage();
+    })();
