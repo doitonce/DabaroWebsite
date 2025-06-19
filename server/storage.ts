@@ -228,8 +228,8 @@ export class MemStorage implements IStorage {
       priceKrw: 156868,
       priceUsd: 1788,
       priceOunce: 49186,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
+      createdAt: new Date(),
+      updatedAt: new Date()
     };
     this.silverPrices.set(today, samplePrice);
 
@@ -438,6 +438,6 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = process.env.NODE_ENV === 'production' && !process.env.DATABASE_URL 
-  ? new MemStorage() 
-  : new DatabaseStorage();
+export const storage = process.env.DATABASE_URL 
+  ? new DatabaseStorage() 
+  : new MemStorage();

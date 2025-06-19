@@ -209,7 +209,7 @@ export default function SilverPrice() {
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            은(Silver) 고시가
+            기준 은 고시가
           </h1>
           <p className="text-xl text-gray-600 mb-6">
             은 시세 정보를 확인하세요
@@ -236,7 +236,7 @@ export default function SilverPrice() {
             <CardHeader className="bg-gradient-to-r from-green-50 to-green-100">
               <CardTitle className="flex items-center justify-between">
                 <span className="text-2xl">
-                  은 고시가
+                  기준 은 고시가
                 </span>
                 <Badge variant="outline" className="inline-flex items-center rounded-full border px-2.5 py-0.5 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-green-700 border-green-700 font-extrabold text-[24px]">
                   {formatDate(latestPrice.date)}
@@ -270,7 +270,7 @@ export default function SilverPrice() {
             <CardTitle className="flex items-center justify-between">
               <div className="flex items-center">
                 <Calendar className="w-6 h-6 mr-3 text-gray-600" />
-                가격 이력 달력
+                기준 은 고시가 이력 달력
               </div>
               <div className="flex items-center space-x-2">
                 <Button
@@ -328,7 +328,7 @@ export default function SilverPrice() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <TrendingUp className="w-6 h-6 mr-3 text-gray-600" />
-              은 고시가 추세 (최근 1년)
+              기준 은 고시가 추세 (최근 1년)
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -361,7 +361,7 @@ export default function SilverPrice() {
                           return (
                             <div className="bg-white p-3 border border-gray-300 rounded-lg shadow-lg">
                               <p className="text-sm font-medium">{`날짜: ${data.fullDate}`}</p>
-                              <p className="text-sm text-green-600">{`은 고시가: ₩${formatNumber(data.price)}`}</p>
+                              <p className="text-sm text-green-600">{`기준 은 고시가: ₩${formatNumber(data.price)}`}</p>
                             </div>
                           );
                         }

@@ -95,7 +95,7 @@ export default function SilverPriceSection() {
               <div className="flex items-center space-x-3">
                 <TrendingUp className="w-6 h-6 text-green-600" />
                 <div>
-                  <h2 className="text-lg lg:text-xl font-semibold text-gray-700">은 고시가</h2>
+                  <h2 className="text-lg lg:text-xl font-semibold text-gray-700">기준 은 고시가</h2>
                   <p className="text-xs text-gray-500">고시일: {latestPrice.date}</p>
                 </div>
               </div>
