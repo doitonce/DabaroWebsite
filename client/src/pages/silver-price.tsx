@@ -30,15 +30,19 @@ export default function SilverPrice() {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   // Query for all silver prices
-  const { data: allPrices, isLoading: isLoadingAll } = useQuery<SilverPrice[]>({
+  const { data: allPrices, isLoading: isLoadingAll, error: allPricesError } = useQuery<SilverPrice[]>({
     queryKey: ['/api/silver-prices'],
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 3,
+    retryDelay: 1000,
   });
 
   // Query for latest silver price
-  const { data: latestPrice, isLoading: isLoadingLatest } = useQuery<SilverPrice>({
+  const { data: latestPrice, isLoading: isLoadingLatest, error: latestPriceError } = useQuery<SilverPrice>({
     queryKey: ['/api/silver-prices/latest'],
     staleTime: 5 * 60 * 1000, // 5 minutes
+    retry: 3,
+    retryDelay: 1000,
   });
 
   // Mutation for manual scraping
@@ -231,19 +235,31 @@ export default function SilverPrice() {
         </div>
 
         {/* Latest Price Card */}
-        {latestPrice && (
-          <Card className="mb-8 border-2 border-green-200 shadow-lg">
-            <CardHeader className="bg-gradient-to-r from-green-50 to-green-100">
-              <CardTitle className="flex items-center justify-between">
-                <span className="text-2xl">
-                  은 고시가
-                </span>
+        <Card className="mb-8 border-2 border-green-200 shadow-lg">
+          <CardHeader className="bg-gradient-to-r from-green-50 to-green-100">
+            <CardTitle className="flex items-center justify-between">
+              <span className="text-2xl">
+                은 고시가
+              </span>
+              {latestPrice && (
                 <Badge variant="outline" className="inline-flex items-center rounded-full border px-2.5 py-0.5 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-green-700 border-green-700 font-extrabold text-[24px]">
                   {formatDate(latestPrice.date)}
                 </Badge>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pt-6">
+              )}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="pt-6">
+            {isLoadingLatest ? (
+              <div className="flex justify-center">
+                <div className="text-center p-6 bg-gray-50 rounded-lg max-w-md">
+                  <div className="animate-pulse">
+                    <div className="h-4 bg-gray-300 rounded w-20 mx-auto mb-4"></div>
+                    <div className="h-12 bg-gray-300 rounded w-32 mx-auto"></div>
+                  </div>
+                  <p className="text-gray-500 mt-4">데이터를 불러오는 중...</p>
+                </div>
+              </div>
+            ) : latestPrice ? (
               <div className="flex justify-center">
                 <div className="text-center p-6 bg-gray-50 rounded-lg max-w-md">
                   <div className="flex items-center justify-center mb-2">
@@ -260,9 +276,35 @@ export default function SilverPrice() {
                   )}
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        )}
+            ) : (
+              <div className="flex justify-center">
+                <div className="text-center p-6 bg-red-50 rounded-lg max-w-md">
+                  <div className="text-red-600 mb-2">데이터를 불러올 수 없습니다</div>
+                  <p className="text-gray-600 text-sm">네트워크 연결을 확인하거나 데이터 업데이트를 시도해보세요.</p>
+                  {latestPriceError && (
+                    <details className="mt-2 text-xs text-gray-500">
+                      <summary className="cursor-pointer">에러 상세</summary>
+                      <p className="mt-1 break-all">{String(latestPriceError)}</p>
+                    </details>
+                  )}
+                  <Button
+                    onClick={() => scrapeMutation.mutate()}
+                    disabled={scrapeMutation.isPending}
+                    className="mt-4 bg-red-600 hover:bg-red-700"
+                    size="sm"
+                  >
+                    {scrapeMutation.isPending ? (
+                      <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                    ) : (
+                      <RefreshCw className="w-4 h-4 mr-2" />
+                    )}
+                    다시 시도
+                  </Button>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
         {/* Price History Calendar */}
         <Card>
