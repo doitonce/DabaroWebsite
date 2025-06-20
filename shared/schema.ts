@@ -55,7 +55,7 @@ export const inventory = pgTable("inventory", {
   silverContent: integer("silver_content").notNull(), // 은함량 %
   specification: text("specification").notNull(),
   isRolled: boolean("is_rolled").notNull().default(false), // 압연재 여부
-  quantityGrams: numeric("quantity_kg", { precision: 10, scale: 2 }).notNull(), // Kg units
+  quantityKg: numeric("quantity_kg", { precision: 10, scale: 2 }).notNull(), // Kg units
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
@@ -105,7 +105,7 @@ export const insertInventorySchema = z.object({
   silverContent: z.number().int().min(1).max(100),
   specification: z.string().min(1),
   isRolled: z.boolean().default(false),
-  quantityGrams: z.number().positive(),
+  quantityKg: z.number().positive(),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;

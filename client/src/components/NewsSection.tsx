@@ -18,6 +18,7 @@ export default function NewsSection() {
   const { data: news, isLoading } = useQuery<NewsItem[]>({
     queryKey: ['/api/news'],
     refetchInterval: 60000 * 30, // Refetch every 30 minutes
+    refetchIntervalInBackground: false, // Only refetch when window is focused
   });
 
   const formatDate = (dateString: string) => {

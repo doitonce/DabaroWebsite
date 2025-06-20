@@ -11,7 +11,7 @@ interface Inventory {
   silverContent: number;
   specification: string;
   isRolled: boolean;
-  quantityGrams: string; // Numeric type from DB comes as string
+  quantityKg: string; // Numeric type from DB comes as string
   createdAt: string;
   updatedAt: string;
 }
@@ -66,7 +66,7 @@ export default function InventorySection() {
   });
 
   const totalItems = sortedInventory?.length || 0;
-  const totalQuantity = sortedInventory?.reduce((sum, item) => sum + parseNumericString(item.quantityGrams), 0) || 0;
+  const totalQuantity = sortedInventory?.reduce((sum, item) => sum + parseNumericString(item.quantityKg), 0) || 0;
 
   return (
     <section className="py-16 bg-gray-50">

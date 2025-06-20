@@ -19,7 +19,7 @@ interface Inventory {
   silverContent: number;
   specification: string;
   isRolled: boolean;
-  quantityGrams: string; // Numeric type from DB comes as string
+  quantityKg: string; // Numeric type from DB comes as string
   createdAt: string;
   updatedAt: string;
 }
@@ -39,7 +39,7 @@ const inventorySchema = z.object({
   silverContent: z.number().min(1, "은함량을 입력해주세요").max(100, "은함량은 100% 이하여야 합니다"),
   specification: z.string().min(1, "규격을 입력해주세요"),
   isRolled: z.boolean().default(false),
-  quantityGrams: z.number().min(0.1, "수량을 입력해주세요"),
+  quantityKg: z.number().min(0.1, "수량을 입력해주세요"),
 });
 
 type InventoryFormData = z.infer<typeof inventorySchema>;
@@ -69,7 +69,7 @@ export default function Inventory() {
       silverContent: 0,
       specification: "",
       isRolled: false,
-      quantityGrams: 0,
+      quantityKg: 0,
     },
   });
 
@@ -184,7 +184,7 @@ export default function Inventory() {
       silverContent: item.silverContent,
       specification: item.specification,
       isRolled: item.isRolled,
-      quantityGrams: parseNumericString(item.quantityGrams),
+      quantityKg: parseNumericString(item.quantityKg),
     });
   };
 
@@ -376,17 +376,17 @@ export default function Inventory() {
                       </div>
                     </div>
                     <div>
-                      <Label htmlFor="quantityGrams">수량(Kg)</Label>
+                      <Label htmlFor="quantityKg">수량(Kg)</Label>
                       <Input
-                        id="quantityGrams"
+                        id="quantityKg"
                         type="number"
                         step="0.1"
-                        {...form.register("quantityGrams", { valueAsNumber: true })}
+                        {...form.register("quantityKg", { valueAsNumber: true })}
                         placeholder="수량을 입력하세요"
                       />
-                      {form.formState.errors.quantityGrams && (
+                      {form.formState.errors.quantityKg && (
                         <p className="text-sm text-red-600 mt-1">
-                          {form.formState.errors.quantityGrams.message}
+                          {form.formState.errors.quantityKg.message}
                         </p>
                       )}
                     </div>
@@ -506,7 +506,7 @@ export default function Inventory() {
                             <td className="px-6 py-4">
                               <Input
                                 type="number"
-                                {...editForm.register("quantityGrams", { valueAsNumber: true })}
+                                {...editForm.register("quantityKg", { valueAsNumber: true })}
                                 className="w-full"
                               />
                             </td>
@@ -549,7 +549,7 @@ export default function Inventory() {
                               {item.specification}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {parseNumericString(item.quantityGrams)} Kg
+                              {parseNumericString(item.quantityKg)} Kg
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               ₩{formatUnitPrice(calculateUnitPrice(item.silverContent, item.isRolled))}

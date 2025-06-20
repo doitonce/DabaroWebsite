@@ -12,7 +12,7 @@ interface SilverChart {
 }
 
 export default function SilverChart() {
-  const { data: chart, isLoading, refetch, isRefetching } = useQuery({
+  const { data: chart, isLoading, refetch, isRefetching, error } = useQuery({
     queryKey: ['/api/silver-chart'],
     queryFn: async () => {
       const response = await fetch('/api/silver-chart');
@@ -26,6 +26,8 @@ export default function SilverChart() {
     },
     staleTime: 30 * 60 * 1000, // 30 minutes
     refetchInterval: 30 * 60 * 1000, // Auto refresh every 30 minutes
+    refetchIntervalInBackground: false, // Only refetch when window is focused
+    retry: 2, // Retry failed requests twice
   });
 
   const handleRefresh = () => {

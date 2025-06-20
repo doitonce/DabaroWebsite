@@ -45,7 +45,7 @@ export default function SilverPriceSection() {
   };
 
   const priceChangeData = allPrices && allPrices.length > 1 && latestPrice
-    ? getPriceChange(latestPrice, allPrices[1]) 
+    ? getPriceChange(latestPrice, allPrices.find(price => price.id !== latestPrice.id)) 
     : null;
 
   // Handle error states

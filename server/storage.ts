@@ -166,7 +166,7 @@ export class DatabaseStorage implements IStorage {
   async createInventoryItem(insertInventory: InsertInventory): Promise<Inventory> {
     const inventoryData = {
       ...insertInventory,
-      quantityGrams: insertInventory.quantityGrams.toString()
+      quantityKg: insertInventory.quantityKg.toString()
     };
     const [item] = await db
       .insert(inventory)
@@ -193,8 +193,8 @@ export class DatabaseStorage implements IStorage {
       updatedAt: new Date()
     };
     
-    if (updateData.quantityGrams !== undefined) {
-      updatePayload.quantityGrams = updateData.quantityGrams.toString();
+    if (updateData.quantityKg !== undefined) {
+      updatePayload.quantityKg = updateData.quantityKg.toString();
     }
     
     const [item] = await db
@@ -261,7 +261,7 @@ export class MemStorage implements IStorage {
       silverContent: 30,
       specification: "은함량 30% 브레이징 합금",
       isRolled: false,
-      quantityGrams: "150.5",
+      quantityKg: "150.5",
       createdAt: new Date(),
       updatedAt: new Date()
     };
@@ -418,7 +418,7 @@ export class MemStorage implements IStorage {
       silverContent: insertInventory.silverContent,
       specification: insertInventory.specification,
       isRolled: insertInventory.isRolled,
-      quantityGrams: insertInventory.quantityGrams.toString(),
+      quantityKg: insertInventory.quantityKg.toString(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -448,7 +448,7 @@ export class MemStorage implements IStorage {
       silverContent: updateData.silverContent ?? existing.silverContent,
       specification: updateData.specification ?? existing.specification,
       isRolled: updateData.isRolled ?? existing.isRolled,
-      quantityGrams: updateData.quantityGrams !== undefined ? updateData.quantityGrams.toString() : existing.quantityGrams,
+      quantityKg: updateData.quantityKg !== undefined ? updateData.quantityKg.toString() : existing.quantityKg,
       updatedAt: new Date(),
     };
     this.inventoryItems.set(id, updated);
